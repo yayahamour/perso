@@ -1,33 +1,40 @@
+from os import system
 from sys import path
 from dataclasses import dataclass
-import os
+import time
 import pygame
 from pygame import display
 import display as disp
+from menu import Menu
 
 class Main():
 
    def main(self):
       """[Start the script of the game]
       """
-      display = disp.Display()
+      select = 1
+      menu = Menu()
       pygame.init()
-      
-      screen = pygame.display.set_mode((disp.SCREEN_WIDTH, disp.SCREEN_HEIGHT))
-      display.principal_menu(screen)
-      pygame.display.set_caption("Test jeu")
-      
-      icon = pygame.image.load('icon.png')
-      pygame.display.set_icon(icon)
-      disp 
-     
+      menu.principal(select)
       playing = True
-      
       while(playing):
          for event in pygame.event.get():
             if (event.type == pygame.QUIT):
                playing = False
-         pygame.display.update()
+               pygame.quit()
+               exit()
+         keys = pygame.key.get_pressed()
+         if keys[pygame.K_UP]:
+            select -= 1
+            if (select == 0):
+               select = 4
+            menu.principal(select)
+         if keys[pygame.K_DOWN]:
+            select += 1
+            if (select == 5):
+               select = 1
+            menu.principal(select)
+         time.sleep(0.07)
 
 
 Main().main()
