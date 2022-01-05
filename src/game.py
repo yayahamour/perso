@@ -20,7 +20,6 @@ class Game():
         """[The function manage all the stage state]
         """
         self.stage += 1
-        self.display.story(f"Vous montez longuement un escalier en collimasson pour arriver à l'étage {self.stage}\n")
         nb = 1
         if (self.stage >= 6 and self.stage % 5 == 1):
             self.display.story("Vous étes en lieu sur, profitez en pour vous reposer\n")
@@ -53,9 +52,10 @@ class Game():
                 else:
                     self.monsters.append(Monster((5,5),2,0,1,{},"Gobelin", 25))
 
-    def game(self):
+    def game(self, screen):
         """[this function launch the sounds and quit the gme if player has 0 pv]
         """
+        self.display.display_game(screen)
         playing = True
         turn_player = True
         time_before_loose = 0
@@ -105,6 +105,7 @@ class Game():
     def start(self, screen):
         """[This function start a new game]
         """
+        self.game(screen)
         self.music.main_music()
         background = pygame.image.load('story.jpg')
         self.display.story(INTRO, screen)
@@ -112,13 +113,14 @@ class Game():
         self.display.story(INTRO2, screen)
         self.display.story(INTRO3, screen)
         self.display.story(INTRO4, screen)
+        self.display.story(INTRO5, screen)
+
         self.display.story(ENTRER, screen)
-        self.display.story(STAGE_1, screen)
         self.player = Hero((50,50), 5, 0, 5, {"Heal":(3,3,10), "Fire":(0,0,5), "Ice":(0,0,7), "Lightning":(0,0,10)}, 0, 1, 50)
         self.monsters = []
         self.stage  = 1
         self.monsters.append(Monster((3, 3), 4, 1, 0, {}, "Gobelin", 1))
-        self.game()
+        self.game(screen)
 
     def getDatabase(self):
         """[This function link a var to the database]
