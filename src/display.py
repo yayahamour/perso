@@ -2,6 +2,7 @@ import pygame
 
 import os
 import time
+from monster import Monster
 
 INTRO = """Lors du première épisode, notre valeureux héro est mort en veins..."""
 INTRO1 = """Il n'était pas si valeureux au final."""
@@ -139,15 +140,24 @@ class Display:
         font = pygame.font.Font('font_life.ttf', 23)
         screen.blit(background, (0,0))
         pygame.display.flip()
-        life = (50, 200)
+        life = (150, 200)
         mp = (300, 350)
-        
-        #Life MP
+        monsters = []
+        monsters.append(Monster((3, 3), 4, 1, 0, {}, "Gobelin", 1))
+        #Display Life
         pygame.draw.rect(screen, (180,180,180), pygame.Rect(35, 0, 125, 30), 2)
-        pygame.draw.rect(screen, (180,0, 0), pygame.Rect(37, 1, 121, 27))
+        pygame.draw.rect(screen, (180,0, 0), pygame.Rect(37, 1, 121*life[0]/life[1], 27))
         string = str(life[0]) + " / " + str((life[1]))
         text = font.render(string, True, red)
         text_rect = text.get_rect(center=(100, 50))
+        screen.blit(text, text_rect)
+        
+        #Display Mp
+        pygame.draw.rect(screen, (180,180,180), pygame.Rect(35, 70, 125, 30), 2)
+        pygame.draw.rect(screen, (0,0, 180), pygame.Rect(37, 71, 121*mp[0]/mp[1], 27))
+        string = str(mp[0]) + " / " + str((mp[1]))
+        text = font.render(string, True, blue)
+        text_rect = text.get_rect(center=(100, 120))
         screen.blit(text, text_rect) 
         
         
