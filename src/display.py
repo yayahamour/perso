@@ -143,7 +143,10 @@ class Display:
         life = (150, 200)
         mp = (300, 350)
         monsters = []
-        monsters.append(Monster((3, 3), 4, 1, 0, {}, "Gobelin", 1))
+        monsters.append(Monster((25, 30), 4, 1, 0, {}, "Gobelin", 1))
+        monsters.append(Monster((40, 40), 4, 1, 0, {}, "Gobelin", 1))
+        monsters.append(Monster((80, 150), 4, 1, 0, {}, "Archer", 1))
+        
         #Display Life
         pygame.draw.rect(screen, (180,180,180), pygame.Rect(35, 0, 125, 30), 2)
         pygame.draw.rect(screen, (180,0, 0), pygame.Rect(37, 1, 121*life[0]/life[1], 27))
@@ -158,9 +161,21 @@ class Display:
         string = str(mp[0]) + " / " + str((mp[1]))
         text = font.render(string, True, blue)
         text_rect = text.get_rect(center=(100, 120))
-        screen.blit(text, text_rect) 
+        screen.blit(text, text_rect)
         
-        
+        #Display monster life
+        x = 750
+        for info in monsters:
+            text = font.render(info.rank, True, white)
+            text_rect = text.get_rect(center=(x+70, 820))
+            screen.blit(text, text_rect)
+            pygame.draw.rect(screen, (180,180,180), pygame.Rect(x, 840, 125, 30), 2)
+            pygame.draw.rect(screen, (180,0, 0), pygame.Rect(x+2, 841, 121*info._life[0]/info._life[1], 27))
+            string = str(info._life[0]) + " / " + str((info._life[1]))
+            text = font.render(string, True, red)
+            text_rect = text.get_rect(center=(x+70, 890))
+            screen.blit(text, text_rect)
+            x += 170
         font = pygame.font.Font('font.ttf', 40)
         #Button attack
         pygame.draw.rect(screen, (180,180,180), pygame.Rect(0, 850, 100, 50))
