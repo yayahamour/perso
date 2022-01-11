@@ -143,8 +143,29 @@ class Display:
         image = pygame.transform.scale(image, (width * scale, height * scale))
         image.set_colorkey(colour)
         return image      
-        
+    
+    def animation_attack(self, screen, dest_x):
+        x = 25
+        frame = 5
+        while(x <= dest_x - 70):
+            background = pygame.image.load('game.jpg')
+            font = pygame.font.Font('font_life.ttf', 23)
+            screen.blit(background, (0,0))
+            
+            
+            sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
+            frame_0 = self.get_image(sprite_sheet_image,2, frame, 275, 270, 1, black)
+            screen.blit(frame_0, (x, 470))
+            x += 20
+            time.sleep(0.1) 
+            frame -= 1
+            if (frame == 0):
+                frame = 5
+            pygame.display.flip()
+            
+            
     def display_game(self, screen):
+        self.animation_attack(screen, 900)
         background = pygame.image.load('game.jpg')
         font = pygame.font.Font('font_life.ttf', 23)
         screen.blit(background, (0,0))
@@ -158,8 +179,8 @@ class Display:
         
         #Display Hero
         sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
-        frame_0 = self.get_image(sprite_sheet_image,2, 1, 300, 350, 1, black)
-        screen.blit(frame_0, (450, 450))
+        frame_0 = self.get_image(sprite_sheet_image,0, 1, 275, 270, 1, black)
+        screen.blit(frame_0, (25, 470))
         
         #Display Life
         pygame.draw.rect(screen, (180,180,180), pygame.Rect(35, 0, 125, 30), 2)
