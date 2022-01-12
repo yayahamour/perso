@@ -147,11 +147,11 @@ class Display:
     def animation_attack(self, screen, dest_x):
         x = 25
         frame = 5
-        for i in range(0, 1):
+        background = pygame.image.load('game.jpg')
+        sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
+        for i in range(0, 2):
             while (frame > 0):
-                background = pygame.image.load('game.jpg')
                 screen.blit(background, (0,0))            
-                sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
                 frame_0 = self.get_image(sprite_sheet_image,i, frame, 270, 270, 1, black)
                 screen.blit(frame_0, (x, 470))
                 time.sleep(0.05) 
@@ -159,9 +159,7 @@ class Display:
                 frame -= 1
             frame = 5
         while(x <= dest_x - 70):
-            background = pygame.image.load('game.jpg')
-            screen.blit(background, (0,0))            
-            sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
+            screen.blit(background, (0,0))
             frame_0 = self.get_image(sprite_sheet_image,2, frame, 270, 270, 1, black)
             screen.blit(frame_0, (x, 470))
             x += 20
@@ -171,11 +169,9 @@ class Display:
                 frame = 5
             pygame.display.flip()
         frame = 5
-        for i in range(3, 4):
+        for i in range(3, 6):
             while (frame > 0):
-                background = pygame.image.load('game.jpg')
-                screen.blit(background, (0,0))            
-                sprite_sheet_image = pygame.image.load('Warior.png').convert_alpha()
+                screen.blit(background, (0,0))
                 frame_0 = self.get_image(sprite_sheet_image,i, frame, 270, 270, 1, black)
                 screen.blit(frame_0, (x, 470))
                 time.sleep(0.05) 
